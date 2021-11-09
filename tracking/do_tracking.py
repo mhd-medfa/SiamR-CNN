@@ -1,12 +1,24 @@
 #!/usr/bin/env python3
 import argparse
-import os
-
+import os,sys,inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir) 
+import tensorflow as tf
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.Session(config=config)
 from got10k.experiments import ExperimentGOT10k, ExperimentVOT, ExperimentOTB, ExperimentUAV123, ExperimentLaSOT, ExperimentDAVIS, ExperimentYouTubeVOS, ExperimentTrackingNet, ExperimentOxuva, ExperimentNfS, ExperimentTColor128
 from got10k.experiments.custom import ExperimentCustom
 
-from tracking.argmax_tracker import ArgmaxTracker
-from tracking.three_stage_tracker import ThreeStageTracker
+try:
+    from tracking.argmax_tracker import ArgmaxTracker
+except:
+    from argmax_tracker import ArgmaxTracker
+try:
+    from tracking.three_stage_tracker import ThreeStageTracker
+except:
+    from three_stage_tracker import  ThreeStageTracker
 
 # change these data paths to where you have the datasets!
 DATASET_PREFIX = "/globalwork/data/"
@@ -15,7 +27,7 @@ VOT17_ROOT_DIR = os.path.join(DATASET_PREFIX, 'vot17')
 VOT16_ROOT_DIR = os.path.join(DATASET_PREFIX, 'vot16')
 VOT15_ROOT_DIR = os.path.join(DATASET_PREFIX, 'vot15')
 VOT18_LT_ROOT_DIR = os.path.join(DATASET_PREFIX, 'vot18-lt')
-OTB_2015_ROOT_DIR = os.path.join(DATASET_PREFIX, 'OTB_new')
+OTB_2015_ROOT_DIR = 'data/otb2015/' #os.path.join(DATASET_PREFIX, 'OTB_new')
 OTB_2013_ROOT_DIR = os.path.join(DATASET_PREFIX, 'OTB2013')
 DAVIS_2017_ROOT_DIR = os.path.join(DATASET_PREFIX, 'DAVIS2017')
 YOUTUBE_VOS_2019_ROOT_DIR = os.path.join(DATASET_PREFIX, "youtube-vos-2019")
@@ -424,5 +436,6 @@ def main_custom():
 
 
 if __name__ == "__main__":
-    assert args.main is not None, "--main not supplied, e.g. --main main_otb"
-    eval(args.main + "()")
+    # assert args.main is not None, "--main not supplied, e.g. --main main_otb"
+    # eval(args.main + "()")
+    main_otb()

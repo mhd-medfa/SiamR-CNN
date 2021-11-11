@@ -423,9 +423,9 @@ def main_oxuva_dev():
 
 
 def main_custom():
-    custom_dataset_root_dir = args.custom_dataset_root_dir
+    custom_dataset_root_dir = 'data/custom_data'#args.custom_dataset_root_dir
     assert custom_dataset_root_dir is not None
-    custom_dataset_name = args.custom_dataset_name
+    custom_dataset_name = 'tracking_data/custom_data' #args.custom_dataset_name
     assert custom_dataset_name is not None
     tracker = build_tracker()
     experiment = ExperimentCustom(
@@ -438,4 +438,5 @@ def main_custom():
 if __name__ == "__main__":
     # assert args.main is not None, "--main not supplied, e.g. --main main_otb"
     # eval(args.main + "()")
-    main_otb()
+    # main_otb()
+    main_custom()

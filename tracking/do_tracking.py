@@ -10,6 +10,7 @@ config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
 from got10k.experiments import ExperimentGOT10k, ExperimentVOT, ExperimentOTB, ExperimentUAV123, ExperimentLaSOT, ExperimentDAVIS, ExperimentYouTubeVOS, ExperimentTrackingNet, ExperimentOxuva, ExperimentNfS, ExperimentTColor128
 from got10k.experiments.custom import ExperimentCustom
+import cv2
 
 try:
     from tracking.argmax_tracker import ArgmaxTracker
@@ -432,11 +433,26 @@ def main_custom():
         root_dir=custom_dataset_root_dir,
         name=custom_dataset_name
     )
-    experiment.run(tracker, visualize=args.visualize_experiment)
+    experiment.run(tracker, visualize=True)#args.visualize_experiment)
 
+def capture_custom_data():
+    vidcap = cv2.VideoCapture(0)
+    success,image = vidcap.read()
+    count = 0
+    count_idx = 0
+    while success:
+        if count_idx%15==0:
+            cv2.imwrite("%d.jpg" % count, image)     # save frame as JPEG file   
+            count+=1   
+            print('Write a new frame: ', success)
+        success,image = vidcap.read()
+        
+        count_idx += 1
 
 if __name__ == "__main__":
     # assert args.main is not None, "--main not supplied, e.g. --main main_otb"
     # eval(args.main + "()")
     # main_otb()
+    # capture_custom_data()
     main_custom()
+

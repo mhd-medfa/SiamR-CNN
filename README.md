@@ -12,11 +12,11 @@ We borrow a lot of code from TensorPack's Faster R-CNN example: https://github.c
 Here we will put all external libraries and this repository into /home/${USERNAME}/vision and use 
 pip to install common libraries
 ```
-mkdir /home/${USERNAME}/vision
-cd /home/${USERNAME}/vision
+mkdir ./vision
+cd ./vision
 
-git clone https://github.com/VisualComputingInstitute/SiamR-CNN.git
-git clone https://github.com/pvoigtlaender/got10k-toolkit.git
+git clone https://github.com/mhd-medfa/SiamR-CNN.git
+git clone https://github.com/mhd-medfa/got10k-toolkit.git
 git clone https://github.com/tensorpack/tensorpack.git
 
 cd tensorpack
@@ -29,7 +29,7 @@ pip3 install wget shapely msgpack msgpack_numpy tabulate xmltodict pycocotools o
 ```
 ### Add libraries to your PYTHONPATH
 ```
-export PYTHONPATH=${PYTHONPATH}:/home/${USERNAME}/vision/got10k-toolkit/:/home/${USERNAME}/vision/tensorpack/
+export PYTHONPATH=${PYTHONPATH}:./vision/got10k-toolkit/:./vision/tensorpack/
 ```
 
 ### Make Folder for models and logs and download pre-trained model

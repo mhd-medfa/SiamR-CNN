@@ -23,8 +23,12 @@ cd tensorpack
 git checkout d24a9230d50b1dea1712a4c2765a11876f1e193c
 cd ..
 
+conda create -n siam-rcnn python=3.6.13
+
+source activate siam-rcnn
+
 pip3 install cython
-pip3 install tensorflow-gpu==1.15
+conda install tensorflow-gpu==1.15
 pip3 install wget shapely msgpack msgpack_numpy tabulate xmltodict pycocotools opencv-python tqdm zmq annoy
 ```
 ### Add libraries to your PYTHONPATH
